@@ -73,7 +73,7 @@ Build for production:
 ## 🏢 Company
 
 Servitec Perú Group E.I.R.L.  
-RUC: 20XXXXXXXXX
+RUC: 20604141240
 
 ---
 
