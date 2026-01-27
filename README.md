@@ -64,9 +64,15 @@ src/
 
 Install dependencies:
 
+pnpm install
+
 Run development server:
 
+pnpm run dev
+
 Build for production:
+
+pnpm run build
 
 ---
 
