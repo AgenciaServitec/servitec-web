@@ -1,43 +1,82 @@
-# Astro Starter Kit: Minimal
+# Servitec Web
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+Corporate website for Servitec Perú Group built with Astro.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This project contains the main corporate landing page for `servitecperu.com`, whose purpose is to present the company and route users to its two main business units:
 
-## 🚀 Project Structure
+- Hardware Support & Technical Services
+- Software Development
 
-Inside of your Astro project, you'll see the following folders and files:
+---
+
+## 🌐 Live Site
+
+https://servitecperu.com
+
+---
+
+## 🎯 Purpose
+
+- Act as the main corporate website for Servitec Perú Group
+- Present the company, its services, and business areas
+- Redirect users to specialized subdomains
+- Provide a fast, SEO-optimized, and lightweight landing page
+
+---
+
+## 🧱 Business Units
+
+This website routes traffic to the following platforms:
+
+- 🛠️ Hardware Support  
+  https://soporte.servitecperu.com
+
+- 💻 Software Development  
+  https://software.servitecperu.com
+
+---
+
+## 🚀 Tech Stack
+
+- Astro
+- HTML5
+- Tailwind CSS
+- Minimal JavaScript
+- SEO-first structure
+
+---
+
+## 📂 Project Structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── components/
+├── layouts/
+├── pages/
+├── sections/
+├── styles/
+└── assets/
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🛠️ Scripts
 
-Any static assets, like images, can be placed in the `public/` directory.
+Install dependencies:
 
-## 🧞 Commands
+Run development server:
 
-All commands are run from the root of the project, from a terminal:
+Build for production:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## 🏢 Company
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Servitec Perú Group E.I.R.L.  
+RUC: 20XXXXXXXXX
+
+---
+
+## 📄 License
+
+Proprietary project. All rights reserved.
