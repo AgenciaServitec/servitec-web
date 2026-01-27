@@ -10,8 +10,10 @@
     --color-background: #0b0f14;
     --color-surface: #111827;
     --color-card: #0f1621;
+    --color-card-2: #111b29;
 
     --color-foreground: #ffffff;
+    --color-foreground-soft: #d6dae6;
     --color-muted: #a9afbf;
     --color-muted-2: #7c8499;
 
@@ -22,6 +24,11 @@
     --color-accent-hover: #e6b800;
 
     --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-soft: rgba(255, 255, 255, 0.06);
+
+    --color-input: rgba(255, 255, 255, 0.04);
+    --color-hover-surface: rgba(255, 255, 255, 0.03);
+
     --color-ring: rgba(245, 196, 0, 0.35);
 
     --color-success: #22c55e;
@@ -32,19 +39,15 @@
     --radius-md: 14px;
     --radius-lg: 18px;
 
-    --shadow-card: 0 12px 30px rgba(0,0,0,0.35);
-
-    --color-card-2: #111b29;                 /* card un pelín más clara */
-    --color-border-soft: rgba(255,255,255,.06);
-    --shadow-soft: 0 10px 24px rgba(0,0,0,.22);
+    --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.35);
+    --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.22);
+    --shadow-elevated: 0 18px 50px rgba(0, 0, 0, 0.45);
 }
 
 @layer base {
     html { font-family: var(--font-sans); }
-
     body { @apply bg-background text-foreground antialiased; }
-
     h1, h2, h3 { letter-spacing: -0.02em; }
 
-    p { color: var(--color-muted); }
+    p { color: var(--color-foreground-soft); }
 }
