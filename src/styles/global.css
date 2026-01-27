@@ -1,0 +1,50 @@
+@import "tailwindcss";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-700.css";
+
+@theme {
+    --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --color-background: #0b0f14;
+    --color-surface: #111827;
+    --color-card: #0f1621;
+
+    --color-foreground: #ffffff;
+    --color-muted: #a9afbf;
+    --color-muted-2: #7c8499;
+
+    --color-primary: #f5c400;
+    --color-primary-hover: #e6b800;
+
+    --color-accent: #f5c400;
+    --color-accent-hover: #e6b800;
+
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-ring: rgba(245, 196, 0, 0.35);
+
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
+
+    --shadow-card: 0 12px 30px rgba(0,0,0,0.35);
+
+    --color-card-2: #111b29;                 /* card un pelín más clara */
+    --color-border-soft: rgba(255,255,255,.06);
+    --shadow-soft: 0 10px 24px rgba(0,0,0,.22);
+}
+
+@layer base {
+    html { font-family: var(--font-sans); }
+
+    body { @apply bg-background text-foreground antialiased; }
+
+    h1, h2, h3 { letter-spacing: -0.02em; }
+
+    p { color: var(--color-muted); }
+}

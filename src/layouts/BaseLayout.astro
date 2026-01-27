@@ -1,0 +1,23 @@
+---
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+
+import "../styles/global.css";
+---
+
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Servitec Peru</title>
+</head>
+<body>
+  <Header/>
+  <main>
+    <slot/>
+  </main>
+  <Footer/>
+</body>
+</html>
