@@ -56,7 +56,7 @@
 [data-reveal-head],
 [data-reveal-grid] [data-reveal-item],
 [data-cta] {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(14px);
     will-change: transform, opacity;
 }
@@ -77,4 +77,15 @@ body::before {
 }
 .card:hover {
     border-color: rgba(245,196,0,.25);
+}
+
+.noise-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("/src/assets/noise.svg"); /* o tu ruta real */
+    background-repeat: repeat;
+    opacity: 0.12; /* BAJAR: antes seguro estaba alto */
+    mix-blend-mode: overlay; /* opcional */
+    z-index: 0;
 }
