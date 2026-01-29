@@ -1,0 +1,143 @@
+---
+import ContentWidth from "../components/ContentWidth.astro";
+import { Image } from "astro:assets";
+
+import gilda from "../assets/clients-institutions/brand-institute-gilda-ballivian-rosado.png";
+import bosco from "../assets/clients-institutions/brand-institute-pedagogico-san-juan-bosco.png";
+import libertador from "../assets/clients-institutions/brand-institute-grupo-educativo-libertador.png";
+import untels from "../assets/clients-institutions/brand-university-untels.png";
+import orrego from "../assets/clients-institutions/brand-institute-antenor-orrego-espinoza.png";
+
+const orgs = [
+    { name: "IESTP Gilda Ballivian", image: gilda },
+    { name: "San Juan Bosto", image: bosco },
+    { name: "Libertador", image: libertador },
+    { name: "UNTELS", image: untels },
+    { name: "Ant. Orrego", image: orrego },
+];
+---
+
+<section class="py-16">
+    <ContentWidth>
+        <div class="text-center" data-reveal-head>
+            <h2 class="text-2xl font-semibold text-foreground md:text-3xl">
+                Confían en nosotros
+            </h2>
+            <p class="mt-2 text-foreground/75">
+                Instituciones y organizaciones con las que hemos trabajado.
+            </p>
+        </div>
+
+        <div
+                class="mt-10 overflow-hidden rounded-3xl border border-white/10 bg-surface/30"
+                data-reveal-grid
+        >
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" data-reveal-grid>
+                {orgs.map((o, idx) => (
+                        <div
+                                class={`group h-full p-8 text-center transition hover:bg-white/5 ${
+                                    idx === orgs.length - 1 ? "lg:col-span-2" : ""
+                                }`}
+                                data-reveal-item
+                        >
+                            <div class="flex min-h-[120px] items-center justify-center">
+                                <Image
+                                        src={o.image}
+                                        alt={`Logo ${o.name}`}
+                                        loading="lazy"
+                                        class="h-14 w-auto opacity-85 grayscale transition duration-200 group-hover:opacity-100 group-hover:grayscale-0"
+                                />
+                            </div>
+
+                            <p class="mt-4 text-base font-semibold text-foreground/85 group-hover:text-foreground">
+                                {o.name}
+                            </p>
+                        </div>
+                ))}
+            </div>
+
+        </div>
+    </ContentWidth>
+
+    <style>
+        /* bordes tipo "grid" (sin inline styles) */
+        [data-reveal-grid] > div > [data-reveal-item] {
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Quitar borde derecho en última columna (lg 3 cols) */
+        @media (min-width: 1024px) {
+            [data-reveal-grid] > div > [data-reveal-item]:nth-child(3n) {
+                border-right: none;
+            }
+        }
+
+        /* Quitar borde derecho en sm 2 cols */
+        @media (min-width: 640px) and (max-width: 1023px) {
+            [data-reveal-grid] > div > [data-reveal-item]:nth-child(2n) {
+                border-right: none;
+            }
+        }
+
+        /* Mobile 1 col: sin border-right */
+        @media (max-width: 639px) {
+            [data-reveal-grid] > div > [data-reveal-item] {
+                border-right: none;
+            }
+        }
+
+        /* Quitar border-bottom de la última fila (simple) */
+        [data-reveal-grid] > div > [data-reveal-item]:nth-last-child(-n + 3) {
+            border-bottom: none;
+        }
+
+        /* Ajuste para cuando solo hay 5 items (última fila incompleta) */
+        @media (min-width: 1024px) {
+            [data-reveal-grid] > div > [data-reveal-item]:nth-last-child(-n + 2) {
+                border-bottom: none;
+            }
+        }
+    </style>
+
+    <script>
+        import { reveal, revealChildren } from "../lib/motion";
+
+        const head = document.querySelector("[data-reveal-head]");
+        const grid = document.querySelector("[data-reveal-grid]");
+
+        const showFallback = () => {
+            if (head) {
+                head.style.opacity = "1";
+                head.style.transform = "none";
+            }
+            if (grid) {
+                grid.querySelectorAll("[data-reveal-item]").forEach((el) => {
+                    el.style.opacity = "1";
+                    el.style.transform = "none";
+                });
+            }
+        };
+
+        if (!grid) {
+            showFallback();
+        } else {
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (reduceMotion) {
+                showFallback();
+            } else {
+                const io = new IntersectionObserver(
+                    ([entry]) => {
+                        if (!entry.isIntersecting) return;
+                        if (head) reveal(head);
+                        revealChildren(grid);
+                        io.disconnect();
+                    },
+                    { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
+                );
+
+                io.observe(grid);
+            }
+        }
+    </script>
+</section>
