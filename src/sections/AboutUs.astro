@@ -1,13 +1,40 @@
 ---
-import ContentWidth from '../components/ContentWidth.astro';
+import ContentWidth from "../components/ContentWidth.astro";
 ---
-<section class="mt-20">
+
+<section class="py-16" data-reveal>
     <ContentWidth>
-        <div class="text-center">
-            <h2 class="text-4xl font-semibold">¿Quiénes somos?</h2>
-            <p class="mt-3 text-muted">
-                Somos una empresa peruana dedicada a brindar soluciones tecnológicas integrales, combinando experiencia en soporte técnico de hardware y desarrollo de software empresarial. Trabajamos con instituciones educativas, empresas privadas y entidades públicas, ofreciendo servicios confiables, escalables y adaptados a cada necesidad.
+        <div class="mx-auto max-w-3xl text-center">
+            <h2 class="text-3xl font-semibold text-foreground md:text-4xl">
+                ¿Quiénes somos?
+            </h2>
+
+            <p class="mt-4 text-foreground/85">
+                Somos una empresa peruana dedicada a brindar soluciones tecnológicas integrales, combinando
+                experiencia en soporte técnico y desarrollo de software. Trabajamos con instituciones educativas,
+                empresas privadas y entidades públicas, ofreciendo servicios confiables y adaptados a cada necesidad.
             </p>
         </div>
     </ContentWidth>
+
+    <script>
+        import { reveal } from "../lib/motion";
+
+        const target = document.querySelector("[data-reveal]");
+        if (target) {
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (reduceMotion) {
+                target.style.opacity = "1";
+                target.style.transform = "none";
+            } else {
+                const io = new IntersectionObserver(([entry]) => {
+                    if (!entry.isIntersecting) return;
+                    reveal(target);
+                    io.disconnect();
+                }, { threshold: 0.15 });
+
+                io.observe(target);
+            }
+        }
+    </script>
 </section>

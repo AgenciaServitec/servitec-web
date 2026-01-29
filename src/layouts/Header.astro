@@ -1,6 +1,28 @@
 ---
-
+import ContentWidth from "../components/ContentWidth.astro";
 ---
-<header>
-    HEADER
+
+<header class="sticky top-0 z-40 border-b border-white/5 bg-background/70 backdrop-blur">
+    <ContentWidth>
+        <div class="flex h-16 items-center justify-between px-6">
+            <a href="/" class="text-sm font-semibold tracking-wide text-foreground">
+                Servitec Perú Group
+            </a>
+
+            <div class="flex items-center gap-4 text-sm">
+                <a
+                        href="https://soporte.servitecperu.com"
+                        class="text-muted transition hover:text-foreground"
+                >
+                    Soporte técnico
+                </a>
+                <a
+                        href="https://software.servitecperu.com"
+                        class="text-muted transition hover:text-foreground"
+                >
+                    Desarrollo de software
+                </a>
+            </div>
+        </div>
+    </ContentWidth>
 </header>

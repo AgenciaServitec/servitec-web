@@ -1,20 +1,139 @@
 ---
+import ContentWidth from "../components/ContentWidth.astro";
 
-import ContentWidth from "../components/ContentWidth.astro";---
+const phrases = [
+    "Un hardware robusto requiere un software inteligente",
+    "Soporte técnico especializado para tu operación",
+    "Sistemas a medida para crecer con orden",
+];
+---
 
-<section>
+<section class="relative overflow-hidden py-20 md:py-28">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,196,0,0.10),transparent_60%)]"></div>
+    <div class="absolute -top-24 left-1/2 h-72 w-[42rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
+
     <ContentWidth>
-        <div class="max-w-5xl mx-auto my-40 px-12">
-            <h1 class="text-center text-4xl font-semibold md:text-5xl mb-7">Un hardware robusto requiere un software inteligente</h1>
-            <p class="text-center text-lg opacity-90 mb-20">Brindamos soporte técnico especializado y desarrollo de sistemas a medida para empresas, instituciones educativas y entidades públicas en todo el Perú.</p>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-x-45 gap-y-30">
-                <a href="https://soporte.servitecperu.com" target="_blank">
-                    <img src="/image/logotipo-hard.webp" class="w-90 mb-1" alt="Logo de Servitec Perú - Hardware & Software">
+        <div class="relative mx-auto max-w-5xl px-6 text-center" data-hero>
+            <!-- Marca (eyebrow) -->
+            <p class="text-sm font-medium text-foreground/70" data-hero-item>
+                Servitec Perú Group
+            </p>
+
+            <!-- H1 fijo (mejor para SEO y UX) -->
+            <h1 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl" data-hero-item>
+                Soporte técnico y desarrollo de software a medida
+            </h1>
+
+            <!-- H2 animado -->
+            <h2
+                    class="mx-auto mt-4 max-w-3xl text-xl font-medium text-foreground/85 md:text-2xl min-h-[2.2em]"
+                    data-hero-item
+            >
+                <span id="hero-rotating" class="text-balance"></span>
+                <span class="ml-1 inline-block w-[2px] translate-y-[2px] animate-pulse bg-primary/60 align-middle"></span>
+            </h2>
+
+            <p class="mx-auto mt-6 max-w-3xl text-lg text-foreground/80" data-hero-item>
+                Brindamos soporte técnico especializado y desarrollo de sistemas a medida para empresas,
+                instituciones educativas y entidades públicas en todo el Perú.
+            </p>
+
+            <p class="mt-10 text-sm text-muted" data-hero-item>
+                Selecciona la unidad que mejor se adapte a tu necesidad:
+            </p>
+
+            <div class="mt-7 flex flex-col items-center justify-center gap-8 md:flex-row" data-hero-item>
+                <a
+                        href="https://soporte.servitecperu.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="group inline-flex flex-col items-center gap-2"
+                        aria-label="Ir a Soporte técnico y hardware"
+                >
+                    <img
+                            src="/image/logotipo-hard.webp"
+                            class="h-16 w-auto transition duration-200 group-hover:scale-[1.02] md:h-[70px]"
+                            alt="Servitec Perú - Soporte Técnico & Hardware"
+                    />
                 </a>
-                <a href="https://software.servitecperu.com" target="_blank">
-                    <img src="/image/logotipo-soft.webp" class="w-90 mb-1" alt="Logo de Servitec Perú - Desarollo de Sistemas">
+
+                <a
+                        href="https://software.servitecperu.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="group inline-flex flex-col items-center gap-2"
+                        aria-label="Ir a Desarrollo de software"
+                >
+                    <img
+                            src="/image/logotipo-soft.webp"
+                            class="h-16 w-auto transition duration-200 group-hover:scale-[1.02] md:h-[70px]"
+                            alt="Servitec Perú - Desarrollo de Software"
+                    />
                 </a>
             </div>
         </div>
     </ContentWidth>
+
+    <div class="mt-16 flex justify-center opacity-40">
+        <span class="h-6 w-px bg-white/30 animate-pulse"></span>
+    </div>
+
+    <style>
+        a.group img {
+            filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
+        }
+        a.group:hover img {
+            filter:
+                    drop-shadow(0 10px 22px rgba(0,0,0,.35))
+                    drop-shadow(0 0 16px rgba(245,196,0,.35))
+                    drop-shadow(0 0 40px rgba(245,196,0,.18));
+        }
+    </style>
+
+    <script define:vars={{ phrases }}>
+        const el = document.getElementById("hero-rotating");
+        if (!el) return;
+
+        const items = phrases || [];
+        let i = 0, j = 0;
+        let deleting = false;
+
+        const type = () => {
+            const current = items[i % items.length] ?? "";
+            if (!deleting) {
+                j++;
+                el.textContent = current.slice(0, j);
+                if (j >= current.length) {
+                    deleting = true;
+                    setTimeout(type, 1400);
+                    return;
+                }
+            } else {
+                j--;
+                el.textContent = current.slice(0, Math.max(j, 0));
+                if (j <= 0) {
+                    deleting = false;
+                    i++;
+                }
+            }
+            const speed = deleting ? 25 : 35;
+            setTimeout(type, speed);
+        };
+
+        type();
+    </script>
+
+    <script>
+        import { animate, stagger } from "motion";
+
+        const hero = document.querySelector("[data-hero]");
+        if (hero) {
+            const items = hero.querySelectorAll("[data-hero-item]");
+            animate(
+                items,
+                { opacity: [0, 1], transform: ["translateY(14px)", "translateY(0px)"] },
+                { duration: 0.65, delay: stagger(0.08), easing: "ease-out" }
+            );
+        }
+    </script>
 </section>
