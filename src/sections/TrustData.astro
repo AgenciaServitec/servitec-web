@@ -1,0 +1,53 @@
+---
+import ContentWidth from "../components/ContentWidth.astro";
+---
+
+<section class="py-14">
+    <ContentWidth>
+        <div
+                class="mx-auto max-w-4xl rounded-2xl border border-white/10 bg-surface/40 p-8 text-center shadow-soft"
+                data-trust
+        >
+            <h2 class="text-2xl font-semibold text-foreground md:text-3xl">
+                Datos de confianza
+            </h2>
+
+            <p class="mx-auto mt-2 max-w-2xl text-foreground/75">
+                Somos una empresa formalmente constituida en el Perú, comprometida con brindar
+                soluciones tecnológicas confiables y profesionales.
+            </p>
+
+            <div class="mt-5 space-y-1 text-sm">
+                <p class="text-muted">
+                    <span class="font-medium text-foreground/90">Razón social:</span>
+                    Servitec Peru Group E.I.R.L.
+                </p>
+                <p class="text-muted">
+                    <span class="font-medium text-foreground/90">RUC:</span>
+                    20604141240
+                </p>
+            </div>
+        </div>
+    </ContentWidth>
+
+    <script>
+        import { reveal } from "../lib/motion";
+
+        const box = document.querySelector("[data-trust]");
+        if (box) {
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (reduceMotion) {
+                box.style.opacity = "1";
+                box.style.transform = "none";
+            } else {
+                const io = new IntersectionObserver(([entry]) => {
+                    if (!entry.isIntersecting) return;
+                    reveal(box, { y: 12, duration: 0.6 });
+                    io.disconnect();
+                }, { threshold: 0.2 });
+
+                io.observe(box);
+            }
+        }
+    </script>
+</section>
