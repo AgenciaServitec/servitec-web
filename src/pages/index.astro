@@ -3,10 +3,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../sections/Hero.astro";
 import AboutUs from "../sections/AboutUs.astro";
 import IndustriesWeServe from "../sections/IndustriesWeServe.astro";
+import TrustData from "../sections/TrustData.astro";
+import CTA from "../sections/CTA.astro";
 ---
 
 <BaseLayout>
-<Hero/>
+    <Hero/>
+    <div class="mx-auto mt-16 h-px w-24 bg-white/10"></div>
     <AboutUs/>
+    <div class="mx-auto mt-16 h-px w-24 bg-white/10"></div>
     <IndustriesWeServe/>
+    <TrustData/>
+    <CTA />
 </BaseLayout>
