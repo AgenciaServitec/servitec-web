@@ -1,128 +1,130 @@
 ---
 import ContentWidth from "../components/ContentWidth.astro";
 
-const phrases = [
-    "Un hardware robusto requiere un software inteligente",
-    "Soporte técnico especializado para tu operación",
-    "Sistemas a medida para crecer con orden",
-];
+const pages = [
+    {
+        image:"/image/logotipo-hard.webp",
+        link:"servitecperu.com"
+    },
+    {
+        image:"/image/logotipo-soft.webp",
+        link:"servitec.site"
+    }
+]
 ---
 
-<section class="relative overflow-hidden py-20 md:py-28">
-    <div class="noise-overlay"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,196,0,0.10),transparent_60%)]"></div>
-    <div class="absolute -top-24 left-1/2 h-72 w-[42rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl"></div>
+<section class="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden py-20">
 
     <ContentWidth>
-        <div class="relative mx-auto max-w-5xl px-6 text-center" data-hero>
-            <!-- Marca (eyebrow) -->
-            <p class="text-sm font-medium text-foreground/70" data-hero-item>
+        <div class="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center text-center" data-hero>
+
+            <p
+                    class="mb-6 flex items-center justify-center gap-3 text-xl md:text-2xl font-semibold tracking-wide text-primary"
+                    data-hero-item
+            >
                 Servitec Perú Group
             </p>
 
-            <!-- H1 fijo (mejor para SEO y UX) -->
-            <h1 class="mt-4 text-4xl font-semibold tracking-tight md:text-5xl" data-hero-item>
-                Soporte técnico y desarrollo de software a medida
-            </h1>
-
-            <!-- H2 animado -->
-            <h2
-                    class="mx-auto mt-4 max-w-3xl text-xl font-medium text-foreground/85 md:text-2xl min-h-[2.2em]"
+            <h1
+                    class="text-balance text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl md:text-5xl leading-[1.15]"
                     data-hero-item
             >
-                <span id="hero-rotating" class="text-balance"></span>
-                <span class="ml-1 inline-block w-[2px] translate-y-[2px] animate-pulse bg-primary/60 align-middle"></span>
-            </h2>
+                Soporte técnico y desarrollo <br class="hidden md:block" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-400 to-amber-600">
+                    de software a medida
+                </span>
+            </h1>
 
-            <p class="mx-auto mt-6 max-w-3xl text-lg text-foreground/80" data-hero-item>
-                Brindamos soporte técnico especializado y desarrollo de sistemas a medida para empresas,
-                instituciones educativas y entidades públicas en todo el Perú.
-            </p>
+            <div id="character-container" class="mt-16 mb-2 relative" data-hero-item>
+                <div class="absolute inset-0 bg-primary/15 blur-3xl rounded-full scale-150 -z-10"></div>
 
-            <p class="mt-10 text-sm text-muted" data-hero-item>
-                Selecciona la unidad que mejor se adapte a tu necesidad:
-            </p>
-
-            <div class="mt-7 flex flex-col items-center justify-center gap-8 md:flex-row" data-hero-item>
-                <a
-                        href="https://soporte.servitecperu.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="group inline-flex flex-col items-center gap-2"
-                        aria-label="Ir a Soporte técnico y hardware"
+                <svg
+                        id="technician-avatar"
+                        viewBox="0 0 100 120"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-[13rem] w-auto origin-bottom drop-shadow-xl"
                 >
-                    <img
-                            src="/image/logotipo-hard.webp"
-                            class="h-16 w-auto transition duration-200 group-hover:scale-[1.02] md:h-[70px]"
-                            alt="Servitec Perú - Soporte Técnico & Hardware"
-                    />
-                </a>
+                    <ellipse cx="50" cy="116" rx="35" ry="6" fill="rgba(0,0,0,0.15)"></ellipse>
 
-                <a
-                        href="https://software.servitecperu.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="group inline-flex flex-col items-center gap-2"
-                        aria-label="Ir a Desarrollo de software"
-                >
-                    <img
-                            src="/image/logotipo-soft.webp"
-                            class="h-16 w-auto transition duration-200 group-hover:scale-[1.02] md:h-[70px]"
-                            alt="Servitec Perú - Desarrollo de Software"
-                    />
-                </a>
+                    <path d="M15 116 C 15 80, 85 80, 85 116 Z" fill="#FACC15"></path>
+                    <path d="M38 90 L 50 105 L 62 90 Z" fill="#EAB308"></path> <rect x="65" y="95" width="10" height="6" rx="1.5" fill="#ffffff" opacity="0.9"></rect> <rect x="66" y="96" width="3" height="4" rx="0.5" fill="#EAB308"></rect>
+
+                    <path d="M42 50 L 42 95 L 58 95 L 58 50 Z" fill="#EAB996"></path>
+
+                    <circle cx="22" cy="56" r="6" fill="#EAB996"></circle>
+                    <circle cx="78" cy="56" r="6" fill="#EAB996"></circle>
+
+                    <circle cx="50" cy="52" r="28" fill="#FDE0C6"></circle>
+
+                    <g id="face-group" class="will-change-transform">
+                        <path d="M30 40 Q 36 38, 42 41" stroke="#5C3A21" stroke-width="2.5" stroke-linecap="round"></path>
+                        <path d="M70 40 Q 64 38, 58 41" stroke="#5C3A21" stroke-width="2.5" stroke-linecap="round"></path>
+
+                        <circle cx="36" cy="52" r="7.5" fill="white"></circle>
+                        <circle cx="64" cy="52" r="7.5" fill="white"></circle>
+
+                        <g id="pupils-group" class="will-change-transform">
+                            <circle cx="36" cy="52" r="4" fill="#292524"></circle>
+                            <circle cx="64" cy="52" r="4" fill="#292524"></circle>
+                            <circle cx="34.5" cy="50.5" r="1.5" fill="white"></circle>
+                            <circle cx="62.5" cy="50.5" r="1.5" fill="white"></circle>
+                        </g>
+
+                        <path d="M50 54 Q 53 61, 48 63" stroke="#DCA884" stroke-width="2" stroke-linecap="round" fill="none"></path>
+
+                        <path d="M44 71 Q 50 75, 56 71" stroke="#C28C67" stroke-width="2" stroke-linecap="round" fill="none"></path>
+
+                        <circle cx="36" cy="52" r="10" stroke="#1C1917" stroke-width="2.5" fill="rgba(255,255,255,0.15)"></circle>
+                        <circle cx="64" cy="52" r="10" stroke="#1C1917" stroke-width="2.5" fill="rgba(255,255,255,0.15)"></circle>
+                        <line x1="46" y1="52" x2="54" y2="52" stroke="#1C1917" stroke-width="2.5"></line>
+                        <line x1="26" y1="52" x2="21" y2="48" stroke="#1C1917" stroke-width="2.5" stroke-linecap="round"></line>
+                        <line x1="74" y1="52" x2="79" y2="48" stroke="#1C1917" stroke-width="2.5" stroke-linecap="round"></line>
+                    </g>
+
+                    <g id="hair-group" class="will-change-transform">
+                        <path d="M22 45 C 22 15, 40 12, 55 16 C 75 20, 78 38, 78 48 C 78 55, 74 50, 68 44 C 55 30, 40 32, 28 48 C 25 52, 22 50, 22 45 Z" fill="#4A2E1B"></path>
+                        <path d="M35 25 Q 45 22, 50 28" stroke="#331E10" stroke-width="2" stroke-linecap="round" fill="none"></path>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="mt-24 w-full max-w-4xl" data-hero-item>
+                <div class="flex flex-col items-center justify-center gap-12 sm:flex-row md:gap-24">
+                    {pages.map((page) => (
+                            <a
+                                    href={`https://${page.link}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="group relative flex items-center justify-center transition-all duration-300 hover:-translate-y-2"
+                                    aria-label={`Ir a ${page.link}`}
+                            >
+                                <img
+                                        src={page.image}
+                                        class="relative z-10 h-20 w-auto transition-all duration-300 group-hover:scale-110 md:h-28 logo-glow"
+                                        alt={`Logotipo de ${page.link}`}
+                                />
+                            </a>
+                    ))}
+                </div>
             </div>
         </div>
     </ContentWidth>
 
-    <div class="mt-16 flex justify-center opacity-40">
-        <span class="h-6 w-px bg-white/30 animate-pulse"></span>
-    </div>
-
     <style>
-        a.group img {
-            filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
+        .logo-glow {
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
         }
-        a.group:hover img {
+        a.group:hover .logo-glow {
             filter:
-                    drop-shadow(0 10px 22px rgba(0,0,0,.35))
-                    drop-shadow(0 0 16px rgba(245,196,0,.35))
-                    drop-shadow(0 0 40px rgba(245,196,0,.18));
+                    drop-shadow(0 10px 15px rgba(0,0,0,0.2))
+                    drop-shadow(0 0 12px rgba(245,196,0,0.3));
+        }
+
+        .will-change-transform {
+            will-change: transform;
         }
     </style>
-
-    <script define:vars={{ phrases }}>
-        const el = document.getElementById("hero-rotating");
-        if (!el) return;
-
-        const items = phrases || [];
-        let i = 0, j = 0;
-        let deleting = false;
-
-        const type = () => {
-            const current = items[i % items.length] ?? "";
-            if (!deleting) {
-                j++;
-                el.textContent = current.slice(0, j);
-                if (j >= current.length) {
-                    deleting = true;
-                    setTimeout(type, 1400);
-                    return;
-                }
-            } else {
-                j--;
-                el.textContent = current.slice(0, Math.max(j, 0));
-                if (j <= 0) {
-                    deleting = false;
-                    i++;
-                }
-            }
-            const speed = deleting ? 25 : 35;
-            setTimeout(type, speed);
-        };
-
-        type();
-    </script>
 
     <script>
         import { animate, stagger } from "motion";
@@ -132,9 +134,61 @@ const phrases = [
             const items = hero.querySelectorAll("[data-hero-item]");
             animate(
                 items,
-                { opacity: [0, 1], transform: ["translateY(14px)", "translateY(0px)"] },
-                { duration: 0.65, delay: stagger(0.08), easing: "ease-out" }
+                { opacity: [0, 1], transform: ["translateY(20px)", "translateY(0px)"] },
+                { duration: 0.8, delay: stagger(0.15), easing: [0.16, 1, 0.3, 1] }
             );
+        }
+
+        const container = document.getElementById('character-container');
+        const faceGroup = document.getElementById('face-group');
+        const pupilsGroup = document.getElementById('pupils-group');
+        const hairGroup = document.getElementById('hair-group');
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let currentFaceX = 0, currentFaceY = 0;
+        let currentPupilX = 0, currentPupilY = 0;
+
+        if (container && faceGroup && pupilsGroup) {
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function render() {
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                let deltaX = (mouseX - centerX) / (window.innerWidth / 2);
+                let deltaY = (mouseY - centerY) / (window.innerHeight / 2);
+
+                deltaX = Math.max(-1, Math.min(1, deltaX));
+                deltaY = Math.max(-1, Math.min(1, deltaY));
+
+                const targetFaceX = deltaX * 4;
+                const targetFaceY = deltaY * 3;
+
+                const targetPupilX = deltaX * 3.5;
+                const targetPupilY = deltaY * 3.5;
+
+                currentFaceX += (targetFaceX - currentFaceX) * 0.1;
+                currentFaceY += (targetFaceY - currentFaceY) * 0.1;
+
+                currentPupilX += (targetPupilX - currentPupilX) * 0.15;
+                currentPupilY += (targetPupilY - currentPupilY) * 0.15;
+
+                faceGroup.style.transform = `translate(${currentFaceX}px, ${currentFaceY}px)`;
+                pupilsGroup.style.transform = `translate(${currentPupilX}px, ${currentPupilY}px)`;
+
+                if (hairGroup) {
+                    hairGroup.style.transform = `translate(${currentFaceX * 0.4}px, ${currentFaceY * 0.3}px)`;
+                }
+
+                requestAnimationFrame(render);
+            }
+
+            requestAnimationFrame(render);
         }
     </script>
 </section>
