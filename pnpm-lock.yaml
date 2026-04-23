@@ -20,6 +20,9 @@ importers:
       motion:
         specifier: ^12.29.2
         version: 12.29.2
+      sharp:
+        specifier: ^0.34.5
+        version: 0.34.5
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
@@ -1872,8 +1875,7 @@ snapshots:
 
   '@fontsource/inter@5.2.8': {}
 
-  '@img/colour@1.0.0':
-    optional: true
+  '@img/colour@1.0.0': {}
 
   '@img/sharp-darwin-arm64@0.34.5':
     optionalDependencies:
@@ -3318,7 +3320,6 @@ snapshots:
       '@img/sharp-win32-arm64': 0.34.5
       '@img/sharp-win32-ia32': 0.34.5
       '@img/sharp-win32-x64': 0.34.5
-    optional: true
 
   shiki@3.21.0:
     dependencies:
