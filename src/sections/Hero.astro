@@ -13,7 +13,7 @@ const pages = [
 ]
 ---
 
-<section class="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden py-20">
+<section class="relative flex min-h-[100vh] flex-col items-center justify-center overflow-hidden py-20">
     <canvas id="space-bg" class="absolute inset-0 w-full h-full -z-10 pointer-events-none"></canvas>
 
     <ContentWidth>
@@ -23,11 +23,11 @@ const pages = [
                     class="mb-6 flex items-center justify-center gap-3 text-xl md:text-2xl font-semibold tracking-wide text-primary"
                     data-hero-item
             >
-                Servitec Perú Group
+                SERVITEC PERÚ
             </p>
 
             <h1
-                    class="text-balance text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl md:text-5xl leading-[1.15]"
+                    class="text-balance italic text-3xl uppercase cursive font-extrabold tracking-tight text-foreground sm:text-4xl md:text-5xl leading-[1.15]"
                     data-hero-item
             >
                 Soporte técnico y desarrollo <br class="hidden md:block" />
@@ -114,25 +114,28 @@ const pages = [
 
     <style>
         .logo-glow {
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+            filter: drop-shadow(0 0 15px rgba(250, 204, 21, 0.2));
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
+
         a.group:hover .logo-glow {
             filter:
-                    drop-shadow(0 10px 15px rgba(0,0,0,0.2))
-                    drop-shadow(0 0 12px rgba(245,196,0,0.3));
+                    drop-shadow(0 0 30px rgba(250, 204, 21, 0.6))
+                    brightness(1.2);
+            transform: scale(1.15) rotate(3deg);
         }
 
-        .will-change-transform {
-            will-change: transform;
+        [data-hero-item] {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        #space-bg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
     <script>
