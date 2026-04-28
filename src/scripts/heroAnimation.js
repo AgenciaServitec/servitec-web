@@ -10,7 +10,6 @@ if (hero) {
     );
 }
 
-// 2. Animación interactiva del personaje (Avatar)
 const container = document.getElementById('character-container');
 const faceGroup = document.getElementById('face-group');
 const pupilsGroup = document.getElementById('pupils-group');

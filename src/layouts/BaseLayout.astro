@@ -1,6 +1,5 @@
 ---
 import Footer from "./Footer.astro";
-
 import "../styles/global.css";
 ---
 
@@ -13,9 +12,15 @@ import "../styles/global.css";
     <title>Servitec Peru</title>
 </head>
 <body class="bg-background">
-  <main>
+<canvas id="space-bg" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+<main style="position:relative;z-index:1;">
     <slot/>
-  </main>
-  <Footer/>
+</main>
+<Footer/>
+
+<script>
+    import "../scripts/spaceBackground.js";
+</script>
 </body>
 </html>
