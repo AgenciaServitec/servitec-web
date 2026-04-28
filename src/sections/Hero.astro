@@ -1,5 +1,6 @@
 ---
 import ContentWidth from "../components/ContentWidth.astro";
+import Avatar from "../components/Avatar.astro";
 
 const pages = [
     {
@@ -25,7 +26,7 @@ const pages = [
                 SERVITEC PERÚ
             </p>
 
-            <h1 class="hero-title text-balance italic text-3xl uppercase cursive font-extrabold tracking-tight text-foreground sm:text-4xl md:text-5xl leading-[1.15]">
+            <h1 class="hero-title text-balance italic text-3xl uppercase cursive font-extrabold tracking-tight text-foreground sm:text-4xl md:text-5xl leading-[1.15]" data-hero-item>
                 Soporte técnico y desarrollo <br class="hidden md:block" />
 
                 <span class="hero-gradient text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-400 to-amber-600">
@@ -36,55 +37,7 @@ const pages = [
             <div id="character-container" class="mt-16 mb-2 relative" data-hero-item>
                 <div class="absolute inset-0 bg-primary/15 blur-3xl rounded-full scale-150 -z-10"></div>
 
-                <svg
-                        id="technician-avatar"
-                        viewBox="0 0 100 120"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-[13rem] w-auto origin-bottom drop-shadow-xl"
-                >
-                    <ellipse cx="50" cy="116" rx="35" ry="6" fill="rgba(0,0,0,0.15)"></ellipse>
-
-                    <path d="M15 116 C 15 80, 85 80, 85 116 Z" fill="#FACC15"></path>
-                    <path d="M38 90 L 50 105 L 62 90 Z" fill="#EAB308"></path> <rect x="65" y="95" width="10" height="6" rx="1.5" fill="#ffffff" opacity="0.9"></rect> <rect x="66" y="96" width="3" height="4" rx="0.5" fill="#EAB308"></rect>
-
-                    <path d="M42 50 L 42 95 L 58 95 L 58 50 Z" fill="#EAB996"></path>
-
-                    <circle cx="22" cy="56" r="6" fill="#EAB996"></circle>
-                    <circle cx="78" cy="56" r="6" fill="#EAB996"></circle>
-
-                    <circle cx="50" cy="52" r="28" fill="#FDE0C6"></circle>
-
-                    <g id="face-group" class="will-change-transform">
-                        <path d="M30 40 Q 36 38, 42 41" stroke="#5C3A21" stroke-width="2.5" stroke-linecap="round"></path>
-                        <path d="M70 40 Q 64 38, 58 41" stroke="#5C3A21" stroke-width="2.5" stroke-linecap="round"></path>
-
-                        <circle cx="36" cy="52" r="7.5" fill="white"></circle>
-                        <circle cx="64" cy="52" r="7.5" fill="white"></circle>
-
-                        <g id="pupils-group" class="will-change-transform">
-                            <circle cx="36" cy="52" r="4" fill="#292524"></circle>
-                            <circle cx="64" cy="52" r="4" fill="#292524"></circle>
-                            <circle cx="34.5" cy="50.5" r="1.5" fill="white"></circle>
-                            <circle cx="62.5" cy="50.5" r="1.5" fill="white"></circle>
-                        </g>
-
-                        <path d="M50 54 Q 53 61, 48 63" stroke="#DCA884" stroke-width="2" stroke-linecap="round" fill="none"></path>
-
-                        <path d="M44 71 Q 50 75, 56 71" stroke="#C28C67" stroke-width="2" stroke-linecap="round" fill="none"></path>
-
-                        <circle cx="36" cy="52" r="10" stroke="#1C1917" stroke-width="2.5" fill="rgba(255,255,255,0.15)"></circle>
-                        <circle cx="64" cy="52" r="10" stroke="#1C1917" stroke-width="2.5" fill="rgba(255,255,255,0.15)"></circle>
-                        <line x1="46" y1="52" x2="54" y2="52" stroke="#1C1917" stroke-width="2.5"></line>
-                        <line x1="26" y1="52" x2="21" y2="48" stroke="#1C1917" stroke-width="2.5" stroke-linecap="round"></line>
-                        <line x1="74" y1="52" x2="79" y2="48" stroke="#1C1917" stroke-width="2.5" stroke-linecap="round"></line>
-                    </g>
-
-                    <g id="hair-group" class="will-change-transform">
-                        <path d="M22 45 C 22 15, 40 12, 55 16 C 75 20, 78 38, 78 48 C 78 55, 74 50, 68 44 C 55 30, 40 32, 28 48 C 25 52, 22 50, 22 45 Z" fill="#4A2E1B"></path>
-                        <path d="M35 25 Q 45 22, 50 28" stroke="#331E10" stroke-width="2" stroke-linecap="round" fill="none"></path>
-                    </g>
-                </svg>
+                <Avatar class="h-[13rem] w-auto origin-bottom drop-shadow-xl" />
             </div>
 
             <div class="mt-24 w-full max-w-4xl" data-hero-item>
@@ -137,22 +90,13 @@ const pages = [
 
         a.group:hover .logo-glow {
             filter:
-                    drop-shadow(0 0 30px rgba(250, 204, 21, 0.6))
+                    drop-shadow(0 0 10px rgba(250, 204, 21, 0.6))
                     brightness(1.2);
             transform: scale(1.01);
         }
 
         [data-hero-item] {
             opacity: 0;
-            transform: translateY(30px);
-            animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes reveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
     </style>
     <script>
