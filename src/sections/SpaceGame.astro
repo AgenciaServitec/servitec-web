@@ -1,0 +1,224 @@
+---
+// src/sections/SpaceGame.astro
+---
+
+<section class="flex flex-col items-center justify-center py-10 relative w-full px-4 overflow-hidden min-h-screen">
+    <div class="text-center mb-6 text-white z-10">
+        <h2 class="text-3xl md:text-4xl font-black mb-1 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-blue-400">
+            SISTEMA DE DEFENSA SERVITEC
+        </h2>
+        <p class="text-blue-200/50 font-mono text-[10px] tracking-[0.2em] uppercase">Security Protocol: Active</p>
+    </div>
+
+    <!-- Contenedor Vertical Compacto (Ratio 3:4) -->
+    <div class="relative w-full max-w-md aspect-[3/4] bg-[#020617] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+
+        <!-- UI Overlay -->
+        <div id="game-overlay" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/90 z-20 cursor-pointer backdrop-blur-sm transition-all duration-300">
+            <div class="text-center p-6">
+                <h3 id="game-status" class="text-3xl text-white font-black mb-2 italic">SISTEMA LISTO</h3>
+                <p class="text-blue-400 font-mono text-[9px] mb-6 tracking-widest uppercase">[ Click para Desplegar ]</p>
+                <div class="flex gap-2 justify-center opacity-40">
+                    <kbd class="text-[9px] text-white font-mono border border-white/20 px-2 py-0.5 rounded">WASD</kbd>
+                    <kbd class="text-[9px] text-white font-mono border border-white/20 px-2 py-0.5 rounded">SPACE</kbd>
+                </div>
+            </div>
+        </div>
+
+        <canvas id="game-canvas" class="block w-full h-full"></canvas>
+
+        <!-- UI HUD -->
+        <div class="absolute top-4 left-5 z-10 pointer-events-none">
+            <div id="score-display" class="text-2xl text-white font-black tabular-nums tracking-tighter drop-shadow-lg">000000</div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const canvas = document.getElementById('game-canvas') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d', { alpha: false }); // Optimización: Desactivar alpha en el canvas
+    const overlay = document.getElementById('game-overlay');
+    const gameStatus = document.getElementById('game-status');
+    const scoreDisplay = document.getElementById('score-display');
+
+    // Assets con carga optimizada
+    const assets = {
+        player: new Image(), enemy1: new Image(), enemy2: new Image(),
+        laserP: new Image(), laserE: new Image(), explosion: new Image()
+    };
+    assets.player.src = '/game/player.png';
+    assets.enemy1.src = '/game/enemy1.png';
+    assets.enemy2.src = '/game/enemy2.png';
+    assets.laserP.src = '/game/laser-player.png';
+    assets.laserE.src = '/game/laser-enemy.png';
+    assets.explosion.src = '/game/explosion.png';
+
+    // Game Logic
+    let isPlaying = false, score = 0, frame = 0;
+    const keys = {};
+    let bullets = [], enemies = [], enemyBullets = [], explosions = [];
+
+    const player = {
+        x: 0, y: 0, w: 45, h: 45,
+        speed: 6.5,
+        cooldown: 6,
+        lastShot: 0
+    };
+
+    function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        // Usar devicePixelRatio para nitidez sin sacrificar rendimiento
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        // La posición inicial depende del nuevo tamaño
+        if(!isPlaying) {
+            player.x = canvas.width / 2 - player.w / 2;
+            player.y = canvas.height - 70;
+        }
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    window.addEventListener('keydown', e => {
+        keys[e.code] = true;
+        if (isPlaying && ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.code)) e.preventDefault();
+    });
+    window.addEventListener('keyup', e => keys[e.code] = false);
+
+    // Detección de colisiones optimizada
+    function checkColl(a, b) {
+        return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+    }
+
+    function update() {
+        frame++;
+
+        // Movimiento
+        if ((keys['KeyA'] || keys['ArrowLeft']) && player.x > 0) player.x -= player.speed;
+        if ((keys['KeyD'] || keys['ArrowRight']) && player.x < canvas.width - player.w) player.x += player.speed;
+        if ((keys['KeyW'] || keys['ArrowUp']) && player.y > canvas.height * 0.5) player.y -= player.speed;
+        if ((keys['KeyS'] || keys['ArrowDown']) && player.y < canvas.height - player.h) player.y += player.speed;
+
+        // Disparo
+        if (keys['Space'] && (frame - player.lastShot) >= player.cooldown) {
+            bullets.push({ x: player.x + player.w/2 - 2, y: player.y, w: 5, h: 18, s: 13 });
+            player.lastShot = frame;
+        }
+
+        // Pools de objetos con limpieza en un solo paso para rendimiento
+        bullets = bullets.filter(b => {
+            b.y -= b.s;
+            return b.y > -20;
+        });
+
+        // Spawn basado en frames para estabilidad
+        if (frame % 35 === 0) {
+            const type = Math.random() > 0.7 ? 2 : 1;
+            enemies.push({
+                x: Math.random() * (canvas.width - 35),
+                y: -40, w: 35, h: 35,
+                s: type === 1 ? 2.5 : 4,
+                t: type
+            });
+        }
+
+        enemies.forEach((en, i) => {
+            en.y += en.s;
+            if (Math.random() < 0.012) {
+                enemyBullets.push({ x: en.x + en.w/2, y: en.y + en.h, w: 7, h: 14, s: 5 });
+            }
+            if (checkColl({x: player.x+8, y: player.y+8, w: 29, h: 29}, en)) end();
+        });
+        enemies = enemies.filter(en => en.y < canvas.height);
+
+        enemyBullets.forEach(eb => {
+            eb.y += eb.s;
+            if (checkColl(eb, {x: player.x+10, y: player.y+10, w: 25, h: 25})) end();
+        });
+        enemyBullets = enemyBullets.filter(eb => eb.y < canvas.height);
+
+        // Colisiones Proyectil - Enemigo
+        for (let i = bullets.length - 1; i >= 0; i--) {
+            for (let j = enemies.length - 1; j >= 0; j--) {
+                if (checkColl(bullets[i], enemies[j])) {
+                    explosions.push({ x: enemies[j].x, y: enemies[j].y, timer: 8 });
+                    enemies.splice(j, 1);
+                    bullets.splice(i, 1);
+                    score += 150;
+                    scoreDisplay.innerText = score.toString().padStart(6, '0');
+                    break;
+                }
+            }
+        }
+
+        explosions.forEach((ex, i) => {
+            ex.timer--;
+            if (ex.timer <= 0) explosions.splice(i, 1);
+        });
+    }
+
+    function draw() {
+        // Fondo sólido para evitar el costo de transparencia del canvas
+        ctx.fillStyle = '#020617';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Grid estático (dibujado solo si es necesario, aquí sutil)
+        ctx.strokeStyle = '#1e293b';
+        ctx.lineWidth = 0.5;
+        for(let i=0; i<canvas.width; i+=40) {
+            ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,canvas.height); ctx.stroke();
+        }
+
+        ctx.drawImage(assets.player, player.x, player.y, player.w, player.h);
+
+        // Renderizado por lotes
+        for(const en of enemies) {
+            ctx.drawImage(en.t === 1 ? assets.enemy1 : assets.enemy2, en.x, en.y, en.w, en.h);
+        }
+
+        for(const b of bullets) {
+            ctx.drawImage(assets.laserP, b.x, b.y, b.w, b.h);
+        }
+
+        for(const eb of enemyBullets) {
+            ctx.drawImage(assets.laserE, eb.x, eb.y, eb.w, eb.h);
+        }
+
+        for(const ex of explosions) {
+            ctx.drawImage(assets.explosion, ex.x, ex.y, 40, 40);
+        }
+    }
+
+    function end() {
+        isPlaying = false;
+        gameStatus.innerText = "SISTEMA CAÍDO";
+        overlay.classList.remove('hidden');
+    }
+
+    function loop() {
+        if (!isPlaying) return;
+        update();
+        draw();
+        requestAnimationFrame(loop);
+    }
+
+    overlay.addEventListener('click', () => {
+        isPlaying = true;
+        score = 0;
+        frame = 0;
+        bullets = []; enemies = []; enemyBullets = []; explosions = [];
+        player.lastShot = 0;
+        scoreDisplay.innerText = "000000";
+        player.x = canvas.width / 2 - player.w/2;
+        player.y = canvas.height - 70;
+        overlay.classList.add('hidden');
+        loop();
+    });
+</script>
+
+<style>
+kbd {
+    box-shadow: 0 2px 0 rgba(255,255,255,0.1);
+    }
+</style>
