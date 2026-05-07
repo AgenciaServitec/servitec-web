@@ -1,0 +1,51 @@
+---
+const projects = [
+    { name: "Servitec Perú", url: "https://servitecperu.com" },
+    { name: "Servitec Site", url: "https://servitec.site" },
+    { name: "Tienda Servitec", url: "https://tiendaservitec.com" },
+    { name: "Servitec All-in-One", url: "https://servitec-allinon.site" },
+    { name: "Creación Página Web", url: "https://creacion-pagina-web.site" },
+    { name: "Fácil Factura", url: "https://facil-factura.com" },
+    { name: "Servitec All-in-One Global", url: "https://servitec-all-in-one.com" },
+];
+---
+
+<section class="max-w-5xl mx-auto px-6 py-10">
+    <h2 class="text-3xl font-bold text-white mb-8 text-center">Nuestros Proyectos</h2>
+
+    <div class="overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-md">
+        <table class="w-full text-left border-collapse">
+            <thead>
+            <tr class="border-b border-white/10 bg-white/5">
+                <th class="px-6 py-4 text-sm font-semibold text-white">Proyecto</th>
+                <th class="px-6 py-4 text-sm font-semibold text-white">Enlace Directo</th>
+                <th class="px-6 py-4 text-sm font-semibold text-white text-right">Acción</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+            {projects.map((project) => (
+                    <tr class="hover:bg-white/[0.02] transition-colors group">
+                        <td class="px-6 py-4 text-gray-300 font-medium">
+                            {project.name}
+                        </td>
+                        <td class="px-6 py-4">
+              <span class="text-sm text-blue-400/80 group-hover:text-blue-400">
+                {project.url.replace('https://', '')}
+              </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a
+                                    href={project.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center text-xs font-bold uppercase tracking-wider text-white bg-blue-600/20 border border-blue-500/50 px-4 py-2 rounded-lg hover:bg-blue-600 hover:border-blue-400 transition-all"
+                            >
+                                Visitar
+                            </a>
+                        </td>
+                    </tr>
+            ))}
+            </tbody>
+        </table>
+    </div>
+</section>
